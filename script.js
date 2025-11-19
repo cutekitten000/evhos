@@ -96,3 +96,23 @@ form.addEventListener('submit', function(e) {
         btn.style.opacity = "1";
     });
 });
+
+
+// --- Menu Hambúrguer Mobile ---
+const hamburger = document.querySelector('.menu-hamburger');
+const navMenu = document.querySelector('.menu-navegacao ul');
+const navLinks = document.querySelectorAll('.menu-navegacao a');
+
+// Abre e fecha o menu
+hamburger.addEventListener('click', () => {
+    hamburger.classList.toggle('active');
+    navMenu.classList.toggle('active');
+});
+
+// Fecha o menu quando clicar em um link (para não ficar aberto na frente do site)
+navLinks.forEach(link => {
+    link.addEventListener('click', () => {
+        hamburger.classList.remove('active');
+        navMenu.classList.remove('active');
+    });
+});

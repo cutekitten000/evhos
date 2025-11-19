@@ -1,3 +1,14 @@
+html {
+    /* Faz a rolagem ser suave e elegante */
+    scroll-behavior: smooth;
+    
+    /* TRUQUE DE MESTRE: 
+       Como seu header é fixo (position: fixed), ele tem uns 80px-100px de altura.
+       Sem isso, quando você clica em "Contato", o título "Contato" fica escondido atrás do menu.
+       Esse padding empurra o conteúdo para baixo na hora do scroll. */
+    scroll-padding-top: 100px; 
+}
+
 /* Reset básico para remover margens padrão */
 * {
     margin: 0;
@@ -546,4 +557,115 @@ footer {
 .footer-links a:hover {
     color: #fff;
     text-decoration: underline;
+}
+
+/* =========================================
+   RESPONSIVIDADE E MOBILE (Adicione ao final)
+   ========================================= */
+
+/* Esconde o hambúrguer no computador */
+.menu-hamburger {
+    display: none;
+    cursor: pointer;
+}
+
+.menu-hamburger span {
+    display: block;
+    width: 28px;
+    height: 3px;
+    background-color: #e5e4e2; /* Prata */
+    margin: 5px 0;
+    transition: 0.4s;
+}
+
+/* --- REGRAS PARA CELULAR E TABLET (Até 768px) --- */
+@media (max-width: 768px) {
+
+    /* 1. Ajuste do Header e Menu */
+    .menu-hamburger {
+        display: block; /* Mostra o botão no celular */
+        z-index: 1100;
+    }
+
+    /* O Menu vira uma gaveta lateral ou overlay */
+    .menu-navegacao ul {
+        position: fixed;
+        top: 0;
+        right: -100%; /* Começa escondido fora da tela */
+        width: 70%; /* Ocupa 70% da tela */
+        height: 100vh;
+        background-color: #0a0a0a; /* Fundo escuro */
+        flex-direction: column; /* Itens um embaixo do outro */
+        justify-content: center;
+        align-items: center;
+        padding-top: 60px;
+        transition: 0.5s ease; /* Animação suave de deslizar */
+        border-left: 1px solid #333;
+        box-shadow: -5px 0 15px rgba(0,0,0,0.8);
+        z-index: 1050;
+    }
+
+    /* Classe que o JS vai adicionar para mostrar o menu */
+    .menu-navegacao ul.active {
+        right: 0; /* Traz o menu para a tela */
+    }
+
+    .menu-navegacao a {
+        font-size: 1.5rem; /* Links maiores para dedo */
+        margin: 20px 0;
+        display: block;
+    }
+
+    /* Animação do Hambúrguer virando X */
+    .menu-hamburger.active span:nth-child(1) {
+        transform: rotate(-45deg) translate(-5px, 6px);
+    }
+    .menu-hamburger.active span:nth-child(2) {
+        opacity: 0; /* Linha do meio some */
+    }
+    .menu-hamburger.active span:nth-child(3) {
+        transform: rotate(45deg) translate(-5px, -6px);
+    }
+
+    /* 2. Ajustes do Hero Slider */
+    .slide-content h1 {
+        font-size: 2rem; /* Diminui o título */
+    }
+    .slide-content p {
+        font-size: 1rem;
+    }
+
+    /* 3. Ajustes da Intro e Textos */
+    .intro-marketing h2 {
+        font-size: 1.8rem;
+    }
+    .intro-marketing p {
+        font-size: 1rem;
+    }
+
+    /* 4. Ajustes dos Cards (Soluções) */
+    .card {
+        width: 100%; /* Ocupa a largura toda no celular */
+        min-width: unset; /* Remove limite mínimo */
+        margin-bottom: 20px;
+    }
+    
+    .cards-container {
+        padding: 0 20px; /* Margem lateral para não colar na borda */
+    }
+
+    /* 5. Ajustes do Sobre */
+    .sobre-box {
+        padding: 30px 20px;
+        border-left-width: 3px;
+    }
+
+    /* 6. Ajustes do Contato */
+    .form-contato {
+        width: 100%;
+    }
+    
+    .secao-contato .container {
+        padding: 0 20px;
+    }
 }
