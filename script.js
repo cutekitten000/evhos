@@ -116,3 +116,31 @@ navLinks.forEach(link => {
         navMenu.classList.remove('active');
     });
 });
+
+
+// --- Dark Mode Toggle com LocalStorage ---
+const themeBtn = document.getElementById('theme-toggle');
+const body = document.body;
+
+// 1. Verificar se já existe preferência salva
+const currentTheme = localStorage.getItem('theme');
+
+// Se tiver salvo "dark", aplica a classe logo ao carregar
+if (currentTheme === 'dark') {
+    body.classList.add('dark-mode');
+}
+
+// 2. Evento de Clique no Botão
+themeBtn.addEventListener('click', () => {
+    // Alterna a classe no body
+    body.classList.toggle('dark-mode');
+
+    // Verifica qual o tema atual depois da troca
+    let theme = 'light';
+    if (body.classList.contains('dark-mode')) {
+        theme = 'dark';
+    }
+
+    // Salva no LocalStorage
+    localStorage.setItem('theme', theme);
+});

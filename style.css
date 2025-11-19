@@ -1,3 +1,36 @@
+
+:root {
+    /* --- TEMA LIGHT (PADRÃO - Pedido do Cliente) --- */
+    --bg-primary: #ffffff;       /* Fundo Principal Branco */
+    --bg-secondary: #f4f4f4;     /* Fundo Secundário Cinza Claro */
+    --bg-card: #ffffff;          /* Fundo do Card Branco */
+    --bg-input: #f0f0f0;         /* Input claro */
+    
+    --text-primary: #1a1a1a;     /* Texto Principal Escuro */
+    --text-secondary: #555555;   /* Texto Secundário Cinza Médio */
+    --accent-color: #000000;     /* Detalhes em Preto */
+    --border-color: #dddddd;     /* Bordas sutis */
+    
+    --card-shadow: 0 5px 15px rgba(0,0,0,0.1); /* Sombra suave */
+    --logo-color: #000000;
+}
+
+body.dark-mode {
+    --bg-primary: #000000;
+    --bg-secondary: #141414;
+    --bg-card: linear-gradient(145deg, #252525, #151515);
+    --bg-input: #222222;
+
+    --text-primary: #e5e4e2;     /* Prata */
+    --text-secondary: #a8a8a8;
+    --accent-color: #e5e4e2;     /* Prata nos detalhes */
+    --border-color: #333333;
+
+    --card-shadow: 0 5px 15px rgba(0,0,0,0.5);
+    --logo-color: #e5e4e2;
+}
+
+
 html {
     /* Faz a rolagem ser suave e elegante */
     scroll-behavior: smooth;
@@ -17,17 +50,42 @@ html {
 }
 
 body {
-    font-family: 'Montserrat', sans-serif; /* Ou Arial, se preferir */
-    background-color: #0a0a0a; /* Fundo do site bem escuro */
-    color: #e5e4e2; /* Cor prata padrão */
+    font-family: 'Montserrat', sans-serif;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    transition: background-color 0.3s, color 0.3s;
+}
+
+
+body,
+.header-principal,
+.intro-marketing,
+.secao-solucoes,
+.secao-sobre,
+.secao-contato,
+.card,
+.input-group input,
+.input-group textarea,
+.social-btn,
+footer,
+.titulo-secao, 
+a, 
+h1, h2, h3, p, span, strong,
+.theme-btn svg {
+    transition: background-color 0.5s ease, 
+                color 0.5s ease, 
+                border-color 0.5s ease, 
+                box-shadow 0.5s ease,
+                fill 0.5s ease,
+                transform 0.5s ease; /* Adicionado para animações de movimento */
 }
 
 /* --- Estilos do Header --- */
 .header-principal {
-    background-color: #000000; /* Preto puro para o header */
-    border-bottom: 1px solid #333; /* Uma linha sutil para separar */
+    background-color: var(--bg-primary);
+    border-bottom: 1px solid var(--border-color);
     padding: 20px 0;
-    position: fixed; /* Para o menu ficar fixo no topo (opcional) */
+    position: fixed;
     width: 100%;
     top: 0;
     z-index: 1000;
@@ -51,7 +109,7 @@ body {
     font-size: 24px;
     font-weight: 700;
     letter-spacing: 2px;
-    color: #e5e4e2; /* Prata */
+    color: var(--logo-color);
     text-transform: uppercase;
     cursor: pointer;
 }
@@ -60,12 +118,12 @@ body {
 .menu-navegacao ul {
     list-style: none;
     display: flex;
-    gap: 30px; /* Espaço entre os itens do menu */
+    gap: 30px;
 }
 
 .menu-navegacao a {
     text-decoration: none;
-    color: #b0b0b0; /* Um prata um pouco mais escuro */
+    color: var(--text-secondary);
     font-size: 16px;
     font-weight: 500;
     transition: all 0.3s ease;
@@ -73,9 +131,60 @@ body {
 
 /* Efeito Hover (Mouse em cima) */
 .menu-navegacao a:hover {
-    color: #ffffff; /* Fica branco brilhante */
-    text-shadow: 0 0 8px rgba(255, 255, 255, 0.5); /* Efeito de brilho prateado */
+    color: var(--accent-color);
+    text-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
 }
+
+/* --- BOTÃO DO TEMA --- */
+.theme-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--text-primary);
+    margin-right: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden; /* Garante que a animação não vaze */
+    width: 40px;
+    height: 40px;
+    border-radius: 50%; /* Fundo redondo opcional ao passar mouse */
+    transition: background-color 0.3s ease;
+}
+
+.theme-btn:hover {
+    background-color: rgba(128, 128, 128, 0.1); /* Leve fundo ao passar mouse */
+}
+
+.theme-btn svg {
+    width: 24px;
+    height: 24px;
+    position: absolute; /* Sobrepõe os ícones */
+    transition: all 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55); /* Efeito elástico */
+}
+
+
+.icon-moon {
+    transform: rotate(0deg) scale(1);
+    opacity: 1;
+}
+/* Sol fica escondido e girado */
+.icon-sun {
+    transform: rotate(180deg) scale(0);
+    opacity: 0;
+}
+
+body.dark-mode .icon-moon {
+    transform: rotate(-180deg) scale(0);
+    opacity: 0;
+}
+/* Sol aparece girando */
+body.dark-mode .icon-sun {
+    transform: rotate(0deg) scale(1);
+    opacity: 1;
+}
+
 
 /* --- Hero Slider --- */
 .hero-slider {
@@ -85,6 +194,8 @@ body {
     overflow: hidden;
     margin-top: 0; /* O header é fixed, então o slider começa do topo */
 }
+
+
 
 .slide {
     position: absolute;
@@ -146,6 +257,10 @@ body {
     z-index: 20;
 }
 
+.slide-content h1, .slide-content p {
+    color: #e5e4e2;
+}
+
 .nav-btn {
     width: 12px;
     height: 12px;
@@ -170,10 +285,10 @@ body {
 
 /* --- Seção Intro Marketing --- */
 .intro-marketing {
-    background-color: #141414; /* Um preto levemente mais claro para contraste */
-    padding: 100px 20px; /* Bastante espaço em cima e embaixo para dar ar de sofisticação */
-    border-top: 2px solid #333; /* Linha superior sutil */
-    border-bottom: 2px solid #333; /* Linha inferior sutil */
+    background-color: var(--bg-secondary);
+    padding: 100px 20px;
+    border-top: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--border-color);
     text-align: center;
     position: relative;
 }
@@ -186,46 +301,43 @@ body {
 
 .intro-marketing h2 {
     font-size: 2.5rem;
-    color: #e5e4e2; /* Prata Platina */
+    color: var(--text-primary);
     margin-bottom: 30px;
     text-transform: uppercase;
     letter-spacing: 2px;
     font-weight: 700;
-    /* Um detalhe extra: gradiente no texto para parecer metal (opcional, mas fica lindo) */
-    background: -webkit-linear-gradient(#eee, #999);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    background: none;
+    -webkit-text-fill-color: initial;
 }
 
 .intro-marketing p {
-    font-size: 1.25rem; /* Fonte grande para leitura fácil */
-    color: #a8a8a8; /* Prata mais fosco para o texto corrido */
-    line-height: 1.8; /* Espaçamento entre linhas para elegância */
+    font-size: 1.25rem;
+    color: var(--text-secondary);
+    line-height: 1.8;
     font-weight: 400;
 }
 
 .intro-marketing strong {
-    color: #fff; /* Destaca o nome da empresa em branco puro */
+    color: var(--accent-color);
     font-weight: 700;
 }
 
 /* --- Seção Soluções --- */
 .secao-solucoes {
-background-color: #000000; /* Fundo Preto Absoluto */
+    background-color: var(--bg-primary);
     padding: 80px 0;
     text-align: center;
-    /* Uma divisória no topo para separar do cinza anterior */
-    border-top: 1px solid #222; 
+    border-top: 1px solid var(--border-color);
 }
 
 
 .titulo-secao {
     font-size: 3rem;
-    color: #e5e4e2;
+    color: var(--text-primary);
     margin-bottom: 60px;
     text-transform: uppercase;
     letter-spacing: 4px;
-    border-bottom: 1px solid #333;
+    border-bottom: 1px solid var(--border-color);
     display: inline-block;
     padding-bottom: 10px;
 }
@@ -240,8 +352,8 @@ background-color: #000000; /* Fundo Preto Absoluto */
 
 /* Estilo Individual do Card */
 .card {
-background: linear-gradient(145deg, #252525, #151515); 
-    border: 1px solid #444; /* Borda mais visível */
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
     border-radius: 15px;
     width: 22%;
     min-width: 250px;
@@ -253,13 +365,13 @@ background: linear-gradient(145deg, #252525, #151515);
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.5); /* Sombra forte para destacar do fundo */
+    box-shadow: var(--card-shadow);
 }
 
 /* Efeito Hover no Card (O Brilho Prateado) */
 .card:hover {
     transform: translateY(-10px); /* Sobe um pouquinho */
-    border-color: #e5e4e2; /* Borda fica prateada */
+    border-color: var(--accent-color);
     box-shadow: 0 10px 30px rgba(229, 228, 226, 0.15); /* Sombra prateada suave */
 }
 
@@ -278,7 +390,7 @@ background: linear-gradient(145deg, #252525, #151515);
 
 /* Título do Card */
 .card h3 {
-    color: #fff;
+    color: var(--text-primary);
     font-size: 1.4rem;
     margin-bottom: 15px;
     font-weight: 600;
@@ -287,7 +399,7 @@ background: linear-gradient(145deg, #252525, #151515);
 
 /* Texto do Card */
 .card p {
-    color: #aaa;
+    color: var(--text-secondary);
     font-size: 0.95rem;
     line-height: 1.6;
     margin-bottom: 30px;
@@ -297,8 +409,8 @@ background: linear-gradient(145deg, #252525, #151515);
 /* Botão do Card */
 .btn-card {
     text-decoration: none;
-    color: #e5e4e2;
-    border: 1px solid #e5e4e2;
+    color: var(--text-primary);
+    border: 1px solid var(--text-primary);
     padding: 10px 25px;
     border-radius: 30px;
     font-size: 0.9rem;
@@ -308,23 +420,22 @@ background: linear-gradient(145deg, #252525, #151515);
 }
 
 .btn-card:hover {
-    background-color: #e5e4e2;
-    color: #000; /* Texto vira preto para contraste */
+    background-color: var(--text-primary);
+    color: var(--bg-primary);
     box-shadow: 0 0 15px rgba(229, 228, 226, 0.6); /* Botão brilha */
 }
 
 /* --- Seção Sobre --- */
 .secao-sobre {
-    background-color: #111111;
-    /* Um gradiente radial bem sutil no fundo para não ficar um preto chapado e sem vida */
-    background: radial-gradient(circle at center, #141414 0%, #000000 70%);
+    background: var(--bg-secondary);
+    border-top: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--border-color);
     padding: 120px 0;
     position: relative;
     text-align: center;
 }
 
 .sobre-box {
-    /* Removemos background, border e shadow */
     background: transparent;
     border: none;
     box-shadow: none;
@@ -332,31 +443,30 @@ background: linear-gradient(145deg, #252525, #151515);
     max-width: 900px;
     margin: 0 auto;
     
-    /* Novo layout: Texto alinhado à esquerda com uma linha lateral (Estilo Editorial) */
     text-align: left; 
-    padding-left: 40px; /* Espaço entre a linha e o texto */
-    border-left: 4px solid #e5e4e2; /* A única "borda" será essa linha elegante na esquerda */
+    padding-left: 40px; 
+    border-left: 4px solid var(--accent-color);
 }
 
 /* O Primeiro parágrafo ganha destaque total (Lead Text) */
 .sobre-box p:first-of-type {
-    font-size: 1.5rem; /* Texto grande */
-    color: #e5e4e2; /* Prata bem claro */
-    font-weight: 300; /* Fonte mais fina e elegante */
+    font-size: 1.5rem;
+    color: var(--text-primary);
+    font-weight: 300;
     margin-bottom: 40px;
     line-height: 1.6;
 }
 
 /* Os parágrafos seguintes */
 .sobre-box p {
-    color: #888; /* Cinza mais escuro para dar contraste com o primeiro */
+    color: var(--text-secondary);
     font-size: 1.1rem;
     line-height: 1.8;
     margin-bottom: 20px;
 }
 
 .sobre-box strong {
-    color: #fff;
+    color: var(--accent-color);
     font-weight: 700;
 }
 
@@ -375,7 +485,7 @@ background: linear-gradient(145deg, #252525, #151515);
 
 /* --- Seção Contato --- */
 .secao-contato {
-    background-color: #000000; /* Volta para o fundo bem escuro */
+    background-color: var(--bg-primary);
     padding: 100px 0;
     text-align: center;
 }
@@ -407,10 +517,10 @@ background: linear-gradient(145deg, #252525, #151515);
 .input-group textarea {
     width: 100%;
     padding: 15px 10px;
-    background: #222;
-    border: 1px solid #444;
+    background: var(--bg-input);
+    border: 1px solid var(--border-color);
     border-radius: 8px;
-    color: #e5e4e2;
+    color: var(--text-primary);
     font-size: 1rem;
     outline: none;
     transition: 0.3s;
@@ -419,8 +529,8 @@ background: linear-gradient(145deg, #252525, #151515);
 /* Efeito de foco no input */
 .input-group input:focus,
 .input-group textarea:focus {
-    border-color: #e5e4e2; /* Borda fica prateada */
-    background: #333;
+    border-color: var(--accent-color);
+    background: var(--bg-primary);
 }
 
 /* Labels */
@@ -442,9 +552,9 @@ background: linear-gradient(145deg, #252525, #151515);
     top: -10px;
     left: 10px;
     font-size: 0.75rem;
-    background-color: #050505; /* Cor do fundo da seção para cobrir a linha */
+    background-color: var(--bg-primary);
+    color: var(--accent-color);
     padding: 0 5px;
-    color: #e5e4e2;
 }
 
 /* Botão de Enviar */
@@ -452,8 +562,8 @@ background: linear-gradient(145deg, #252525, #151515);
     width: 100%;
     padding: 15px;
     background: transparent;
-    border: 1px solid #e5e4e2;
-    color: #e5e4e2;
+    border: 1px solid var(--accent-color);
+    color: var(--accent-color);
     font-weight: 700;
     letter-spacing: 2px;
     cursor: pointer;
@@ -463,8 +573,8 @@ background: linear-gradient(145deg, #252525, #151515);
 }
 
 .btn-enviar:hover {
-    background: #e5e4e2;
-    color: #000;
+    background: var(--accent-color);
+    color: var(--bg-primary);
     box-shadow: 0 0 20px rgba(229, 228, 226, 0.4);
 }
 
@@ -479,13 +589,13 @@ background: linear-gradient(145deg, #252525, #151515);
     width: 50px;
     height: 50px;
     border-radius: 50%; /* Faz virar bolinha */
-    border: 1px solid #333;
+    border: 1px solid var(--border-color);
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #888;
+    color: var(--text-secondary);
     transition: 0.3s;
-    background: #111;
+    background: var(--bg-input);
 }
 
 .social-btn svg {
@@ -496,8 +606,8 @@ background: linear-gradient(145deg, #252525, #151515);
 /* Cores no Hover */
 .social-btn:hover {
     transform: scale(1.1); /* Aumenta um pouquinho */
-    border-color: #e5e4e2;
-    color: #e5e4e2; /* Fica prata brilhante */
+    border-color: var(--accent-color);
+    color: var(--accent-color);
     box-shadow: 0 0 15px rgba(255,255,255,0.2);
 }
 
@@ -515,8 +625,8 @@ background: linear-gradient(145deg, #252525, #151515);
 
 /* --- Footer (Rodapé) --- */
 footer {
-    background-color: #141414; /* Mesmo cinza da seção 'Sobre', para contrastar com o Contato */
-    border-top: 2px solid #333; /* Borda mais grossa e visível */
+    background-color: var(--bg-secondary);
+    border-top: 2px solid var(--border-color);
     padding: 60px 0;
     text-align: center;
     display: flex;
@@ -529,7 +639,7 @@ footer {
 .footer-logo {
     font-size: 2.2rem;
     font-weight: 700;
-    color: #fff; /* Branco puro para destaque total */
+    color: var(--text-primary);
     letter-spacing: 4px;
     text-transform: uppercase;
     margin-bottom: 25px;
@@ -545,7 +655,7 @@ footer {
 }
 
 .footer-content strong {
-    color: #e5e4e2; /* Prata */
+    color: var(--text-primary);
 }
 
 /* Links do rodapé */
@@ -557,6 +667,10 @@ footer {
 .footer-links a:hover {
     color: #fff;
     text-decoration: underline;
+}
+
+.footer-content p, .footer-links a {
+    color: var(--text-secondary);
 }
 
 /* =========================================
